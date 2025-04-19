@@ -11,15 +11,15 @@ pipeline {
 
         stage('Test') {
             steps {
-                echo 'Deploying app...'
-                sh 'docker rm -f nodejs-demo-app || true'
-                sh 'docker run -d -p 3000:3000 --name nodejs-demo-app nodejs-demo-app'
+                echo 'Running tests inside the container...'
+                sh 'docker run --rm nodejs-demo-app npm test'
             }
         }
 
         stage('Deploy') {
             steps {
                 echo 'Deploying app...'
+                sh 'docker rm -f nodejs-demo-app || true'
                 sh 'docker run -d -p 3000:3000 --name nodejs-demo-app nodejs-demo-app'
             }
         }
