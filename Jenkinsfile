@@ -11,8 +11,8 @@ pipeline {
 
         stage('Test') {
             steps {
-                echo 'Running tests...'
-                sh 'npm test'
+                echo 'Running tests inside the container...'
+                sh 'docker run --rm nodejs-demo-app npm test'
             }
         }
 
